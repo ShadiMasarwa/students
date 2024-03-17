@@ -1,0 +1,130 @@
+{
+  "students": [
+    {
+      "id": 123456789,
+      "name": "John Smith",
+      "age": 18,
+      "gender": "male",
+      "image": "https://randomuser.me/portraits/thumb/men/1.jpg",
+      "address": "123 Main St, Anytown, CA 12345",
+      "status": 0
+    },
+    {
+      "id": 234567890,
+      "name": "Emily Johnson",
+      "age": 17,
+      "gender": "female",
+      "image": "https://randomuser.me/portraits/thumb/women/2.jpg",
+      "address": "456 Elm St, Smallville, NY 54321",
+      "status": 0
+    },
+    {
+      "id": 345678901,
+      "name": "Michael Williams",
+      "age": 16,
+      "gender": "male",
+      "image": "https://randomuser.me/portraits/thumb/men/3.jpg",
+      "address": "789 Oak St, Villagetown, TX 67890",
+      "status": 0
+    },
+    {
+      "id": 456789012,
+      "name": "Sophia Anderson",
+      "age": 17,
+      "gender": "female",
+      "image": "https://randomuser.me/portraits/thumb/women/4.jpg",
+      "address": "101 Pine St, Bigtown, FL 98765",
+      "status": 0
+    },
+    {
+      "id": 567890123,
+      "name": "Daniel Martinez",
+      "age": 16,
+      "gender": "male",
+      "image": "https://randomuser.me/portraits/thumb/men/5.jpg",
+      "address": "202 Maple Ave, Townsville, OH 54321",
+      "status": 0
+    },
+    {
+      "id": 678901234,
+      "name": "Olivia Brown",
+      "age": 18,
+      "gender": "female",
+      "image": "https://randomuser.me/portraits/thumb/women/6.jpg",
+      "address": "303 Oakwood Dr, Lakeview, GA 67890",
+      "status": 0
+    },
+    {
+      "id": 789012345,
+      "name": "William Wilson",
+      "age": 17,
+      "gender": "male",
+      "image": "https://randomuser.me/portraits/thumb/men/7.jpg",
+      "address": "404 Cedar Ln, Rivershore, MA 54321",
+      "status": 0
+    },
+    {
+      "id": 890123456,
+      "name": "Isabella Taylor",
+      "age": 16,
+      "gender": "female",
+      "image": "https://randomuser.me/portraits/thumb/women/8.jpg",
+      "address": "505 Birch Ave, Mountainview, NV 98765",
+      "status": 0
+    },
+    {
+      "id": 901234567,
+      "name": "James Moore",
+      "age": 17,
+      "gender": "male",
+      "image": "https://randomuser.me/portraits/thumb/men/9.jpg",
+      "address": "606 Pinecone Rd, Hillcrest, WA 23456",
+      "status": 0
+    },
+    {
+      "id": 112233445,
+      "name": "Emma Lee",
+      "age": 18,
+      "gender": "female",
+      "image": "https://randomuser.me/portraits/thumb/women/10.jpg",
+      "address": "707 Elmwood Blvd, Seaside, OR 76543",
+      "status": 0
+    },
+    {
+      "id": 556677889,
+      "name": "Noah Johnson",
+      "age": 17,
+      "gender": "male",
+      "image": "https://randomuser.me/portraits/thumb/men/11.jpg",
+      "address": "808 Redwood Ave, Hilltop, FL 54321",
+      "status": 0
+    },
+    {
+      "id": 890123454,
+      "name": "Isabella Taylor",
+      "age": 16,
+      "gender": "female",
+      "image": "https://randomuser.me/portraits/thumb/women/12.jpg",
+      "address": "505 Birch Ave, Mountainview, NV 98765",
+      "status": 0
+    },
+    {
+      "id": 901234564,
+      "name": "James Moore",
+      "age": 17,
+      "gender": "male",
+      "image": "https://randomuser.me/portraits/thumb/men/13.jpg",
+      "address": "606 Pinecone Rd, Hillcrest, WA 23456",
+      "status": 0
+    },
+    {
+      "id": 112233444,
+      "name": "Emma Lee",
+      "age": 18,
+      "gender": "female",
+      "image": "https://randomuser.me/portraits/thumb/women/14.jpg",
+      "address": "707 Elmwood Blvd, Seaside, OR 76543",
+      "status": 0
+    }
+  ]
+}
