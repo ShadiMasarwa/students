@@ -3,7 +3,7 @@ import GlobalContext from "../Hooks/GlobalContext";
 import Student from "./Student";
 
 const Students = () => {
-  const { students } = useContext(GlobalContext);
+  const { students, filter } = useContext(GlobalContext);
   //   console.log(students);
   return (
     <table className="table table-striped">
@@ -16,9 +16,11 @@ const Students = () => {
         </tr>
       </thead>
       <tbody>
-        {students.map((el) => (
-          <Student student={el} key={el.id} />
-        ))}
+        {students.map((el) =>
+          filter === el.status || filter === 0 ? (
+            <Student student={el} key={el.id} />
+          ) : null
+        )}
       </tbody>
     </table>
   );
