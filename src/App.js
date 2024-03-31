@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import Students from "./Components/Students";
 import GlobalContext from "./Hooks/GlobalContext";
 import data from "./students.json";
