@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import GlobalContext from "../Hooks/GlobalContext";
 
-const Student = ({ student }) => {
+const Student = ({ student, handleEdit }) => {
   const { students, setStudents } = useContext(GlobalContext);
   const handleClick = (status) => {
     const temp = students.map((std) => {
@@ -10,8 +10,35 @@ const Student = ({ student }) => {
     });
     setStudents([...temp]);
   };
+
+  const handleDelete = () => {
+    const temp = students.filter((std) => std.id !== student.id);
+    setStudents([...temp]);
+  };
+
   return (
     <tr style={{ verticalAlign: "middle" }}>
+      <td>
+        <button className="btn" onClick={handleDelete}>
+          <span
+            className="bi bi-trash3-fill"
+            style={{ fontSize: "2rem", color: "red" }}
+          ></span>
+        </button>
+      </td>
+      <td>
+        <button
+          className="btn"
+          data-bs-toggle="modal"
+          data-bs-target="#EditModal"
+          onClick={() => handleEdit(student.id)}
+        >
+          <span
+            className="bi bi-pencil-square"
+            style={{ fontSize: "2rem", color: "green" }}
+          ></span>
+        </button>
+      </td>
       <td className="w-25">
         <img
           src={student.image}

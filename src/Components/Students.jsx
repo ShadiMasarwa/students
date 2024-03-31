@@ -1,44 +1,26 @@
 import React, { useContext, useState } from "react";
 import GlobalContext from "../Hooks/GlobalContext";
+import Student from "./Student";
 
-const Layout = (props) => {
-  const { setFilter, students, setStudents } = useContext(GlobalContext);
-  const handleChange = (id) => {
-    setFilter(Number(id));
-  };
-  const std = {
-    id: "",
-    name: "",
-    address: "",
-    gender: "",
-    image: "",
-    age: 0,
-    status: 0,
-  };
-  const [newStudent, setNewStudent] = useState({});
-  const [errHidden, SetErrHidden] = useState(true);
-  const [disableUpdate, setDisableUpdate] = useState(true);
+const Students = () => {
+  const { students, setStudents, filter } = useContext(GlobalContext);
+  const [currStudent, setCurrStudent] = useState({});
 
-  const handleEmptyFields = () => {
-    const std = {
-      id: "",
-      name: "",
-      address: "",
-      gender: "",
-      image: "",
-      age: 0,
-      status: 0,
-    };
-    setNewStudent(std);
-    SetErrHidden(true);
+  const handleEdit = (id) => {
+    const temp = students.find((el) => el.id === id);
+    setCurrStudent(temp);
   };
 
-  const UpdateNewStudent = (Field, value) => {
-    const temp = { ...newStudent };
+  const handleUpade = () => {
+    const temp = students.map((st) =>
+      st.id === currStudent.id ? currStudent : st
+    );
+    setStudents(temp);
+  };
+
+  const UpdateTempStudent = (Field, value) => {
+    const temp = { ...currStudent };
     switch (Field) {
-      case "id":
-        temp.id = value;
-        break;
       case "name":
         temp.name = value;
         break;
@@ -54,84 +36,38 @@ const Layout = (props) => {
       default:
         break;
     }
-    setNewStudent(temp);
-    const found = students.find((std) => std.id === parseInt(temp.id));
-    if (found) {
-      SetErrHidden(false);
-    } else {
-      SetErrHidden(true);
-    }
-    if (CheckIfFullInfo(temp) && !found) setDisableUpdate(false);
-    else setDisableUpdate(true);
+    setCurrStudent(temp);
   };
-
-  const CheckIfFullInfo = (temp) => {
-    return (
-      temp.id.length &&
-      temp.name.length &&
-      temp.address.length &&
-      (temp.gender === "male" || temp.gender === "female") &&
-      temp.age
-    );
-  };
-
-  const handleAddNew = () => {
-    const num = Math.floor(Math.random() * 99);
-    const gender = newStudent.gender === "male" ? "men" : "women";
-    const imgUrl = `https://randomuser.me/portraits/thumb/${gender}/${num}.jpg`;
-    const temp = { ...newStudent };
-    temp.image = imgUrl;
-    setStudents([...students, temp]);
-  };
-
   return (
-    <div className="container-fluid">
-      <div
-        className="bg-info p-2 d-flex justify-content-between align-items-center"
-        style={{ height: "10vh" }}
-      >
-        <div>
-          <button
-            className="btn btn-warning"
-            data-bs-toggle="modal"
-            data-bs-target="#AddModal"
-            onClick={handleEmptyFields}
-          >
-            Add New Student
-          </button>
-        </div>
-        <h3>Student Management App</h3>
-        <div className="me-5">
-          <select
-            name="choice"
-            style={{ width: "200px" }}
-            onChange={(e) => handleChange(e.target.value)}
-          >
-            <option value="0">All</option>
-            <option value="1">Present</option>
-            <option value="2">Absent</option>
-            <option value="3">Late</option>
-            <option value="4">Sick</option>
-          </select>
-        </div>
-      </div>
-      <div
-        className="p-2 container"
-        style={{ height: "80vh", overflowY: "auto" }}
-      >
-        {props.children}
-      </div>
-      <div
-        className="bg-dark p-2 d-flex justify-content-center align-items-center "
-        style={{ height: "10vh" }}
-      >
-        <div style={{ color: "white" }}>All Rights Reserved &copy;</div>
-      </div>
+    <div>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col" style={{ textAlign: "center" }}>
+              Delete
+            </th>
+            <th scope="col" style={{ textAlign: "center" }}>
+              Edit
+            </th>
+            <th scope="col">Image</th>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {students.map((el) =>
+            filter === el.status || filter === 0 ? (
+              <Student student={el} handleEdit={handleEdit} key={el.id} />
+            ) : null
+          )}
+        </tbody>
+      </table>
       {/* Edit Modal */}
 
       <div
         className="modal fade"
-        id="AddModal"
+        id="EditModal"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
         tabindex="-1"
@@ -142,7 +78,7 @@ const Layout = (props) => {
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5 " id="staticBackdropLabel">
-                Add New Student
+                Edit Student Info
               </h1>
               <button
                 type="button"
@@ -165,16 +101,9 @@ const Layout = (props) => {
                   className="form-control"
                   id="IDInput"
                   placeholder="Id number"
-                  value={newStudent.id}
-                  onChange={(e) => UpdateNewStudent("id", e.target.value)}
+                  value={currStudent.id}
+                  disabled="true"
                 />
-                <label
-                  className="form-label"
-                  style={{ color: "red" }}
-                  hidden={errHidden}
-                >
-                  ID already exist
-                </label>
               </div>
               <div className="mb-3">
                 <label
@@ -189,8 +118,8 @@ const Layout = (props) => {
                   className="form-control"
                   id="NameInput"
                   placeholder="Full Name"
-                  value={newStudent.name}
-                  onChange={(e) => UpdateNewStudent("name", e.target.value)}
+                  value={currStudent.name}
+                  onChange={(e) => UpdateTempStudent("name", e.target.value)}
                 />
               </div>
               <div className="mb-3">
@@ -206,8 +135,8 @@ const Layout = (props) => {
                   className="form-control"
                   id="AddressInput"
                   placeholder="Address Name"
-                  value={newStudent.address}
-                  onChange={(e) => UpdateNewStudent("address", e.target.value)}
+                  value={currStudent.address}
+                  onChange={(e) => UpdateTempStudent("address", e.target.value)}
                 />
               </div>
               <div className="mb-3">
@@ -222,9 +151,9 @@ const Layout = (props) => {
                   type="text"
                   className="form-control"
                   id="GenderInput"
-                  placeholder="male\female"
-                  value={newStudent.gender}
-                  onChange={(e) => UpdateNewStudent("gender", e.target.value)}
+                  placeholder="Gender"
+                  value={currStudent.gender}
+                  onChange={(e) => UpdateTempStudent("gender", e.target.value)}
                 />
               </div>
               <div className="mb-3">
@@ -240,8 +169,8 @@ const Layout = (props) => {
                   className="form-control"
                   id="AgeInput"
                   placeholder="Age"
-                  value={newStudent.age}
-                  onChange={(e) => UpdateNewStudent("age", e.target.value)}
+                  value={currStudent.age}
+                  onChange={(e) => UpdateTempStudent("age", e.target.value)}
                 />
               </div>
             </div>
@@ -256,9 +185,8 @@ const Layout = (props) => {
               <button
                 type="button"
                 className="btn btn-success"
-                onClick={handleAddNew}
+                onClick={handleUpade}
                 data-bs-dismiss="modal"
-                disabled={disableUpdate}
               >
                 Update
               </button>
@@ -270,4 +198,4 @@ const Layout = (props) => {
   );
 };
 
-export default Layout;
+export default Students;
